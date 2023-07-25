@@ -5,6 +5,7 @@ const [edit, setEdit] = useState(false);
 const [editForm, setEditForm] = useState("")
 const [setId, setIdThing] = useState(0)
 const [showTask, setShowTask] = useState([])
+const [fakeEdit, setFakeEdit] = useState(false)
 
 
 const completeTask = (state) => {
@@ -56,6 +57,9 @@ const allTasks = (state) => {
   console.log('Task component rendered');
   }, []);
 
+  const handleFakeEdit = () => {
+    setEdit(false)
+  }
 
 
   return(
@@ -66,7 +70,7 @@ const allTasks = (state) => {
 
       <button onClick= {() => allTasks(state)}>All</button> */}
 
-      {showTask.map(({id, task, complete})=>
+      {state.map(({id, task, complete})=>
       <div key={id}>
         <h2>{task}
         {task ? (<input
@@ -77,7 +81,8 @@ const allTasks = (state) => {
         /> ): null}
         {task ? <button onClick={()=> handleDelete(id)}>Delete</button> : task}
         {task ? <button onClick={() => handleEditTrue(id)}>Edit</button> : task}
-        {setId === id ?
+        { }
+        {setId === id && edit === true?
           <form onSubmit = {(event) => handleSubmit(id, event)}>
             <input
             onChange ={(event) => handleEditForm(event)}
@@ -86,6 +91,7 @@ const allTasks = (state) => {
             value={editForm}
             />
             <button type="submit">Submit</button>
+            <button onClick={handleFakeEdit}>X</button>
           </form> : null}
       </h2>
       </div>

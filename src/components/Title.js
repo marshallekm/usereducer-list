@@ -21,6 +21,10 @@ const [newTitle, setNewTitle] = useState('');
     console.log(event.target.value)
   }
 
+  const handleFakeEdit = () => {
+    setEditTitle(false)
+  }
+
   return (
     <div>
     <h1>{stateTitle.title}</h1>
@@ -34,6 +38,7 @@ const [newTitle, setNewTitle] = useState('');
         onChange = {(event) => handleEditTitle(event)}
         />
         <button type = {handleSubmit}>Submit</button>
+        <button onClick={handleFakeEdit}>X</button>
       </form>
     : null}
     </div>
